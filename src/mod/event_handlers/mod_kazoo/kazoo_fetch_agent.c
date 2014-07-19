@@ -77,6 +77,8 @@ static char *xml_section_to_string(switch_xml_section_t section) {
 		return "chatplan";
 	case SWITCH_XML_SECTION_CHANNELS:
 		return "channels";
+	case SWITCH_XML_SECTION_LANGUAGES:
+		return "languages";
 	default:
 		return "unknown";
 	}
@@ -577,6 +579,7 @@ switch_status_t bind_fetch_agents() {
 	bind_fetch_agent(SWITCH_XML_SECTION_DIALPLAN, &globals.dialplan_fetch_binding);
 	bind_fetch_agent(SWITCH_XML_SECTION_CHATPLAN, &globals.chatplan_fetch_binding);
 	bind_fetch_agent(SWITCH_XML_SECTION_CHANNELS, &globals.channels_fetch_binding);
+	bind_fetch_agent(SWITCH_XML_SECTION_LANGUAGES, &globals.languages_fetch_binding);
 
 	return SWITCH_STATUS_SUCCESS;
 }
@@ -587,6 +590,7 @@ switch_status_t unbind_fetch_agents() {
 	unbind_fetch_agent(&globals.dialplan_fetch_binding);
 	unbind_fetch_agent(&globals.chatplan_fetch_binding);
 	unbind_fetch_agent(&globals.channels_fetch_binding);
+	unbind_fetch_agent(&globals.languages_fetch_binding);
 
 	return SWITCH_STATUS_SUCCESS;
 }
@@ -597,6 +601,7 @@ switch_status_t remove_xml_clients(ei_node_t *ei_node) {
 	remove_xml_client(ei_node, globals.dialplan_fetch_binding);
 	remove_xml_client(ei_node, globals.chatplan_fetch_binding);
 	remove_xml_client(ei_node, globals.channels_fetch_binding);
+	remove_xml_client(ei_node, globals.languages_fetch_binding);
 
 	return SWITCH_STATUS_SUCCESS;
 }
@@ -655,6 +660,7 @@ switch_status_t remove_fetch_handlers(ei_node_t *ei_node, erlang_pid *from) {
 	remove_fetch_handler(ei_node, from, globals.dialplan_fetch_binding);
 	remove_fetch_handler(ei_node, from, globals.chatplan_fetch_binding);
 	remove_fetch_handler(ei_node, from, globals.channels_fetch_binding);
+	remove_fetch_handler(ei_node, from, globals.languages_fetch_binding);
 
 	return SWITCH_STATUS_SUCCESS;
 }
@@ -691,6 +697,7 @@ switch_status_t handle_api_command_streams(ei_node_t *ei_node, switch_stream_han
 	handle_api_command_stream(ei_node, stream, globals.dialplan_fetch_binding);
 	handle_api_command_stream(ei_node, stream, globals.chatplan_fetch_binding);
 	handle_api_command_stream(ei_node, stream, globals.channels_fetch_binding);
+	handle_api_command_stream(ei_node, stream, globals.languages_fetch_binding);
 
 	return SWITCH_STATUS_SUCCESS;
 }
