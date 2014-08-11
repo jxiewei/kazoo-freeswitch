@@ -407,7 +407,7 @@ static switch_status_t config(void) {
 
         if (!globals.num_worker_threads) {
                 switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_WARNING, "Number of worker threads not found in configuration, using default\n");
-                globals.num_worker_threads = 10;
+                globals.num_worker_threads = 100;
         }
 
 	if (zstr(globals.ip)) {
